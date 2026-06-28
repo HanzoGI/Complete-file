@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Live Background Container */
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        /* Dark Overlay for Readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 5, 5, 0.85) 100%);
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(10, 10, 10, 0.5);
+            border-bottom: 2px solid #8b0000;
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff3333;
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff3333;
+            text-shadow: 0 0 8px rgba(255, 51, 51, 0.8);
+        }
+
+        /* Main Layout Wrapper */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Profile Block Header */
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background: rgba(15, 15, 15, 0.85);
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            border-top: 4px solid #8b0000;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, #8b0000, #ff3333);
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #1a1a1a;
+            border: 3px solid #0a0a0a;
+        }
+
+        .profile-card h1 {
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .profile-card h2 {
+            font-size: 16px;
+            color: #ff3333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .profile-socials {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .profile-socials a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.3s;
+        }
+
+        .profile-socials a:hover {
+            color: #ffffff;
+            background: #8b0000;
+            border-color: #ff3333;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+        }
+
+        /* Content Card Styling */
+        .card {
+            background: rgba(15, 15, 15, 0.75);
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            border-left: 4px solid #8b0000;
+            border-radius: 4px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Cyberpunk Split Variant border */
+        .cyber-border {
+            border-left: 4px solid #00f0ff;
+            border-right: 1px solid rgba(0, 240, 255, 0.2);
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        /* Title Link Styles */
+        .project-link {
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 51, 51, 0.2);
+            padding-bottom: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .project-link:hover {
+            transform: translateX(5px);
+        }
+
+        .cyber-link {
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff3333;
+        }
+
+        .cyber-title {
+            color: #00f0ff;
+        }
+
+        /* Project Split Layout */
+        .project-meta {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #a0a0a0;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            aspect-ratio: 16 / 9;
+            background-color: #151515;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LIVE BACKGROUND VIDEO PLACEHOLDER -->
+    <video autoplay loop muted playsinline class="video-bg">
+        <source src="tiktokio.com1782547377_MRiZxmdRZwULyuR2ABYD.mp4" type="video/mp4">
+    </video>
+
+    <!-- Dark Crimson Theme Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Dev Profile</div>
+        <ul class="nav-links">
+            <li><a href="SOLO samurai.html">Solo Samurai</a></li>
+            <li><a href="Cyberpunk test.html">Cyberpunk</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+        <!-- PROFILE BLOCK SECTION -->
+        <header class="profile-card">
+            <div class="avatar-container">
+                <img src="1000037690.jpg" alt="Developer Avatar" class="avatar-img">
+            </div>
+            <h1>Jeff Henrich</h1>
+            <h2>Independent Game Developer</h2>
+            
+            <ul class="profile-socials">
+                <li><a href="profetional portfolio.html" target="_blank">Profile</a></li>
+                <li><a href="#" target="_blank">GitHub</a></li>
+                <li><a href="#" target="_blank">Discord</a></li>
+            </ul>
+        </header>
+
+        <!-- GAME 1: SOLO SAMURAI -->
+    
+            <p class="project-meta">Genre: Action Hack-and-Slash • Status: In Development / Released</p>
+            <p>A hardcore single-player experience focusing on precise blade combat, parry mechanics, and disciplined execution. Players walk the solitary path of a masterless ronin fighting through a dark, mythical feudal Japan.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="samurai-sunset-birds-desktop-wallpaper-preview.jpg"alt="Solo Samurai Gameplay">
+                    <div class="image-caption">Combat Mechanics & Blade Effects</div>
+                
+                </div>
+                <div class="gallery-item">
+                    <img src="bamboo samurai.jpeg" alt="Solo Samurai Environment">
+                    <div class="image-caption">The Crimson Cyber Samurai </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAME 2: CYBERPUNK -->
+        <section id="cyberpunk" class="card cyber-border">
+            <!-- LINK TO THIRD HTML PAGE -->
+            <a href="SOLO samurai.html" class="project-link cyber-link">
+

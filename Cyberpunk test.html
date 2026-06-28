@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last Cyber Samurai - Story Introduction</title>
+    <style>
+        /* Base Reset & Fine Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #060608;
+            color: #e5e5e5;
+            line-height: 1.7;
+            overflow-x: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        /* 1. LIVE BACKGROUND VIDEO CONTAINER */
+        /* Place your moving mp4 wallpaper file here (e.g., looping rainy neon alley or cyber fog) */
+        .live-video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -3;
+            object-fit: cover;
+        }
+
+        /* Dark Atmospheric Cyberpunk-Crimson Layer Matrix */
+        .theme-overlay-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(6, 6, 8, 0.96) 0%, rgba(18, 4, 12, 0.92) 100%);
+            z-index: -2;
+        }
+
+        /* Fixed Navigation Header */
+        header.nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(6, 6, 8, 0.85);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+        }
+
+        .back-btn {
+            color: #b5b5b5;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            padding: 6px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+            border-color: #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Main Screen Layout Container */
+        .story-container {
+            max-width: 1100px;
+            margin: 120px auto 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Narrative Story Block Wrapper */
+        .narrative-card {
+            background: rgba(12, 12, 14, 0.88);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-left: 5px solid #00f0ff;
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+        }
+
+        .narrative-card h1 {
+            font-size: 38px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .narrative-card .tagline {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ff3333;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(255, 51, 51, 0.3);
+        }
+
+        .narrative-card p {
+            margin-bottom: 20px;
+            color: #cccccc;
+            font-size: 15px;
+        }
+
+        .narrative-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 2. DEDICATED IMAGE SHOWCASE SLOT */
+        .character-showcase {
+            position: relative;
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            padding: 10px;
+            background: #09090b;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+            border-radius: 6px;
+        }
+
+        .showcase-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Tech/Sci-Fi Design Accents */
+        .character-showcase::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            border-top: 3px solid #ff3333;
+            border-right: 3px solid #ff3333;
+        }
+
+        .character-showcase::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -5px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 3px solid #00f0ff;
+            border-left: 3px solid #00f0ff;
+        }
+
+        /* Screen Scaling Fixes */
+        @media (max-width: 850px) {
+            .story-container {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Insert your live moving background wallpaper loop here -->
+    <video autoplay loop muted playsinline class="live-video-bg">
+        <source src="tiktokio.com1782638393_dIvrc8wWhjPXkF93BSMM.mp4" type="video/mp4">
+    </video>
+
+    <div class="theme-overlay-mask"></div>
+
+    <header class="nav-header">
+        <div class="logo">Project // Neo-Ronin</div>
+        <!-- Connect this to your main profile hub document -->
+        <a href="first test.html" class="back-btn">⇠ Main Interface</a>
+    </header>
+
+    <main class="story-container">
+        
+        <!-- Story Text Column -->
+        <article class="narrative-card">
+            <h1>The Solitary Blade</h1>
+            <div class="tagline">Lone Survivor of the Cyber Grid</div>
+            
+            <p>Neo-Kyoto, 2099. The mega-corporations executed the Global Purge, dismantling the ancient military factions and short-circuiting every honorable digital consciousness. The great Cyber Samurai Order was systematically deleted overnight—except for one.</p>
+            
+            <p>You are that anomaly. A lone wandering ghost in a shell of carbon-fiber plates and overclocked neural processors, navigating a hyper-connected wasteland where chrome is currency and survival requires absolute silence.</p>
+            
+            <p>With a high-frequency thermal katana slung across your back and an offline memory core keeping your history safe, you stalk the rain-drenched neon alleys alone. You hold the last preserved combat protocols of a dead era, operating as the final shield against a completely lawless electronic empire.</p>
+        </article>
+
+        <!-- Graphic Image Column -->
+        <section class="character-showcase">
+            <!-- Swap 'cyber-samurai-art.jpg' with your concept art or screenshot filename -->
+            <img src="cyber samurai 12.jpeg" alt="The Last Cyber Samurai Character Showcase" class="showcase-img">
+        </section>
+
+    </main>
+
+</body>
+</html>
+

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Samurai - The Wandering Ronin</title>
+    <style>
+        /* Base Styles Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Dark Theme Background Overlay */
+        .crimson-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 30%, rgba(139, 0, 0, 0.15) 0%, rgba(10, 10, 10, 1) 70%);
+            z-index: -1;
+        }
+
+        /* Navigation / Header Link */
+        .back-nav {
+            padding: 20px 10%;
+            background: rgba(15, 15, 15, 0.6);
+            border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn {
+            color: #ff3333;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.8);
+        }
+
+        /* Content Container Split Layout */
+        .intro-container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Responsiveness for Smaller Screens */
+        @media (max-width: 768px) {
+            .intro-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* Story Introduction Text Block */
+        .story-content {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            border-left: 4px solid #8b0000;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        }
+
+        .story-content h1 {
+            font-size: 38px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .story-content .subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ff3333;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            color: #b0b0b0;
+            font-size: 16px;
+        }
+
+        /* Samurai Image Display Box */
+        .samurai-showcase {
+            position: relative;
+            border: 2px solid rgba(139, 0, 0, 0.4);
+            padding: 10px;
+            background: #111111;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .samurai-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: filter 0.5s ease;
+        }
+
+        .samurai-showcase::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            border-top: 3px solid #ff3333;
+            border-right: 3px solid #ff3333;
+        }
+
+        .samurai-showcase::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -5px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 3px solid #ff3333;
+            border-left: 3px solid #ff3333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="crimson-glow"></div>
+
+    <!-- Navigation Header -->
+    <div class="back-nav">
+        <a href="first test.html" class="back-btn">⇠ Return to Main Portfolio</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <main class="intro-container">
+        
+        <!-- Story / Concept Column -->
+        <article class="story-content">
+            <h1>Solo Samurai</h1>
+            <div class="subtitle">The Path of the Masterless Ronin</div>
+            
+            <p>Japan, 1603. The era of war draws to a fragile close, leaving thousands of warriors without a master. You are one of them—a solitary ronin condemned to wander the shifting landscapes of a deeply fractured nation.</p>
+            
+            <p>From the snow-swept northern mountain peaks of Hokkaido down to the treacherous blood-stained bamboo thickets of Kyoto, your blade tracks a path of survival, vengeance, and hidden redemption. No lord dictates your movements, and no army guards your flank.</p>
+            
+            <p>Every step through the vast provinces brings deadly encounters with rival swordsmen, corrupt clan magistrates, and shadowy mythical threats. In this isolated pilgrimage across the feudal empire, your edge is your only law, and your focus is your only shield.</p>
+        </article>
+
+        <!-- Graphic Image Column -->
+        <!-- INSERT YOUR SAMURAI PICTURE BELOW -->
+        <!-- Replace 'samurai-wanderer.jpg' with your character concept art or screenshot file name -->
+        <section class="samurai-showcase">
+            <img src="images.jpeg" alt="The Wandering Samurai Character Art" class="samurai-img">
+        </section>
+
+    </main>
+
+</body>
+</html>
+

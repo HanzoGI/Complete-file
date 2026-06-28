@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samurai</title>
+    <style>
+        /* Base Reset & Theme Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --bg-overlay: rgba(10, 10, 12, 0.85);
+            --text-primary: #e2e8f0;
+            --text-muted: #8a8f98;
+            --accent-crimson: #990000;
+            --accent-glow: #ff3333;
+            --panel-bg: rgba(20, 20, 25, 0.6);
+            --border-color: #331111;
+        }
+
+        body {
+            background-color: #0a0a0c;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Live Background Container */
+        .live-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .live-bg iframe, .live-bg video {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 Aspect Ratio */
+            min-height: 100vh;
+            min-width: 177.77vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--bg-overlay) 80%),
+                        linear-gradient(to bottom, transparent, #0a0a0c);
+            z-index: -1;
+        }
+
+        /* Layout Architecture */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+        .logo span {
+            color: var(--accent-glow);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        nav a:hover {
+            color: var(--accent-glow);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            padding: 6rem 0;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            flex-shrink: 0;
+        }
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            z-index: 2;
+        }
+        .profile-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 40px;
+            height: 40px;
+            border-top: 3px solid var(--accent-glow);
+            border-left: 3px solid var(--accent-glow);
+            z-index: 3;
+        }
+        .profile-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-bottom: 3px solid var(--accent-glow);
+            border-right: 3px solid var(--accent-glow);
+            z-index: 3;
+        }
+        .profile-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.2);
+            pointer-events: none;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        .hero-text h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-primary);
+        }
+        .tagline {
+            color: var(--accent-glow);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+        .bio {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons & Interactions */
+        .cta-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--accent-crimson), #c00);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(153, 0, 0, 0.4);
+            border: 1px solid rgba(255,51,51,0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        /* Grid Sections */
+        .section-title {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-glow);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .card:hover {
+            border-color: var(--accent-glow);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Mechanics */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 3rem 0;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            nav a {
+                margin: 0 1rem;
+            }
+            .section-title {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. LIVE BACKGROUND LOCATION -->
+    <!-- Swap the YouTube ID below or replace the entire iframe with a <video> tag -->
+    <div class="live-bg">
+        <video autoplay loop muted playsinline class="video-bg">
+            <source src="tiktokio.com1782540545_IMJedraAkDSbxnb8bTIg.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <header>
+            <div class="logo">RONIN<span>.</span>DEV</div>
+            <nav>
+                <a href="#projects">Arsenal</a>
+                <a href="#skills">Disciplines</a>
+                <a href="#contact">Signal</a>
+            </nav>
+        </header>
+
+        <!-- Hero Presenter Section -->
+        <section class="hero">
+            <div class="profile-wrapper">
+                <!-- 2. PROFILE PICTURE LOCATION -->
+                <!-- Place your image link or local path in the src attribute below -->
+                <img src="bamboo samurai.jpeg" alt="Profile Picture" class="profile-pic">
+                <div class="profile-glow"></div>
+            </div>
+            <div class="hero-text">
+                <p class="tagline">Blade & Code</p>
+                <h1>SHADOW <span>WARRIOR</span></h1>
+                <p class="bio">Crafting precise digital experiences through disciplined code execution. Specialized in slicing complex architectures into clean, maintainable systems.</p>
+                <a href="first test.html" class="cta-btn">Initiate Clash</a>
+            </div>
+        </section>
+
+        <!-- Projects Grid Section -->
+        <section id="projects">
+            <h2 class="section-title">The Arsenal</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Katana Engine</h3>
+                    <p>High-performance rendering engine built with unmatched execution speed and sharp architecture layouts.</p>
+                </div>
+                <div class="card">
+                    <h3>Shogun UI</h3>
+                    <a href="facebook.com" class="cta-btn">more info on me</a>
+
